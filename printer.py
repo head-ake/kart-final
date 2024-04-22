@@ -12,4 +12,6 @@ class Printer:
 
         return
 
-
+if __name__ == "__main__":
+    printer = Printer()
+    printer.print([(1, 2), (3, 4)])
