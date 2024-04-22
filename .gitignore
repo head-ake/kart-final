@@ -1,5 +1,6 @@
 .DS_Store
 data/yolov8n.pt
+test_files/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
