@@ -5,9 +5,9 @@ import numpy as np
 
 from ultralytics import YOLO
 
-model = YOLO('yolov8n.pt')
+model = YOLO('data/yolov8n.pt')
 
-video_path = 'path'
+video_path = 'test_files/walking.mp4'
 cap = cv2.VideoCapture(video_path)
 
 track_history = defaultdict(lambda: [])
