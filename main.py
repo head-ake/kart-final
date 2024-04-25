@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import tracker
+import printer
 
 vid_path = 'test_files/walking.mp4'
 cap = cv2.VideoCapture(vid_path)
@@ -11,6 +12,9 @@ height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 black_frame = np.zeros((height, width, 3), dtype=np.uint8)
 
 tracker = tracker.Tracker()
+printer = printer.Printer()
+
+last_processed = None
 
 while cap.isOpened():
     ret, frame = cap.read()

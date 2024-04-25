@@ -3,3 +3,5 @@ to get the model run
 and place the downloaded file in the data directory
 
 `pip install ultralytics` 
+
+if you want to write test code for the printer put it in the `if __init__ = '__main__'` block and it'll run with `python3 printer.py`

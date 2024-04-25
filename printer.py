@@ -1,3 +1,5 @@
+import time
+
 class Printer:
     def __init__(self):
         # init stuff
@@ -8,6 +10,8 @@ class Printer:
         # vals is list of tuples of x, y coordinates
         for val in vals:
             x, y = val
+            # sleep for 3 secs to simulate drawing process
+            time.sleep(3)
             print (x, y)
 
         return
