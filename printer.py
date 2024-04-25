@@ -11,7 +11,7 @@ class Printer:
         for val in vals:
             x, y = val
             # sleep for 3 secs to simulate drawing process
-            time.sleep(3)
+            time.sleep(0.5)
             print (x, y)
 
         return

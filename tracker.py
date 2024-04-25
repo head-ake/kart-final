@@ -1,8 +1,10 @@
+import logging
 from ultralytics import YOLO
 
 class Tracker:
     def __init__(self):
         self.model = YOLO('data/yolov8n.pt')
+        logging.getLogger('ultralytics').setLevel(logging.WARNING)
         return
 
     def track(self, img):
