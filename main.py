@@ -6,7 +6,8 @@ import printer
 import popper
 
 vid_path = 'test_files/walking.mp4'
-cap = cv2.VideoCapture(vid_path)
+cap = cv2.VideoCapture(0)
+
 
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -16,12 +17,13 @@ printer = popper.Popper()
 
 print_lock = threading.Lock()
 
-def visualize_positions(positions):
-    black_frame = np.zeros((height, width, 3), dtype=np.uint8)
+def visualize_positions(positions, frame=None):
+    if frame is None:
+        frame = np.zeros((height, width, 3), dtype=np.uint8)
     for position in positions:
         x, y = position
-        cv2.rectangle(black_frame, (x-5, y-5), (x+5, y+5), (0, 255, 0), 2)
-    return black_frame
+        cv2.rectangle(frame, (x-5, y-5), (x+5, y+5), (0, 255, 0), 2)
+    return frame
 
 def print_thread(positions):
     with print_lock:
@@ -34,7 +36,7 @@ while cap.isOpened():
     if ret:
         positions, annotated_img = tracker.track(frame) 
 
-        cv2.imshow('positions', visualize_positions(positions))
+        cv2.imshow('positions', visualize_positions(positions, frame=frame))
 
         if not print_lock.locked():
             t = threading.Thread(target=print_thread, args=(positions,))
