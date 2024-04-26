@@ -29,7 +29,8 @@ class Popper:
 
 
     def send_gcode(self, gcode):
-        self.cereal.write(gcode.encode('utf-8'))
+        # self.cereal.write(gcode.encode('utf-8'))
+        print(gcode)
         time.sleep(1)
 
     def __init__(self):
@@ -64,5 +65,4 @@ if __name__ == "__main__":
     printer = Popper()
     printer.print([(25, 25), (25, 25), (25, 25), (25, 25),(25, 25)])
     time.sleep(30)
-    printer.print([(15, 15), (75, 75)])
     # printer.close()
