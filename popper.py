@@ -6,7 +6,7 @@ import gcode
 class Popper:
     WRITE = 0
     MOVE = 15
-    PORT = "COM3"  # to get port run python -m serial.tools.list_ports
+    PORT = "/dev/cu.usbserial-1430"  # to get port run python -m serial.tools.list_ports
     baud = 115200
     home = "G28"
     SIZE = 15
@@ -26,6 +26,6 @@ class Popper:
 
 if __name__ == "__main__":
     printer = Popper()
-    printer.print([(25, 25), (25, 25), (25, 25), (25, 25),(25, 25)])
+    printer.print([(0, 0), (200, 200), (0, 200), (25, 25)])
     time.sleep(30)
     # printer.close()

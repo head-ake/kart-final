@@ -1,15 +1,15 @@
 from mecode import G
 import serial
 
-printer_port = 'COM3'
+printer_port = '/dev/cu.usbserial-1430'
 baud = 115200
-# cereal = serial.Serial(printer_port, baud, timeout=1)
+cereal = serial.Serial(printer_port, baud, timeout=1)
 home = "G28"
 
 outfile_path = 'file.gcode'
 
 def getGCode(toFile: bool, list):
-    WRITINGDEPTH = 0
+    WRITINGDEPTH = -2
     MOVINGDEPTH = 15
     g = G(outfile=outfile_path)
 
@@ -36,14 +36,14 @@ def getGCode(toFile: bool, list):
 
     for x in list:
         g.abs_move(x[0], x[1], MOVINGDEPTH)
-        cross(x, 6)
+        dot(x, 6)
         g.abs_move(x[0], x[1], MOVINGDEPTH)
 
 def outputFile():
     with open(outfile_path, 'r') as f:
         for line in f:
-            print(line)
-            # cereal.write(line.encode('utf-8'))
+            cereal.write(line.encode('utf-8'))
+
         # cereal.close()
 
 # getGCode(True, [(15,15), (50, 50)])

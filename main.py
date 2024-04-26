@@ -1,4 +1,5 @@
 import cv2
+import time
 import numpy as np
 import threading
 import tracker
@@ -26,7 +27,9 @@ def visualize_positions(positions, frame=None):
 
 def print_thread(positions):
     with print_lock:
+        print(positions)
         printer.print(positions)
+        time.sleep(60)
         pass
 
 while cap.isOpened():
@@ -35,10 +38,17 @@ while cap.isOpened():
     if ret:
         positions, annotated_img = tracker.track(frame) 
 
+        scaled_pos = []
+        for position in positions:
+            x = np.interp(position[0], (0, width), (0, 50))
+            y = np.interp(position[1], (0, height), (0, 50))
+
+            scaled_pos.append((x, y))
+
         cv2.imshow('positions', visualize_positions(positions, frame=frame))
 
         if not print_lock.locked():
-            t = threading.Thread(target=print_thread, args=(positions,))
+            t = threading.Thread(target=print_thread, args=(scaled_pos,))
             t.start()
 
         if cv2.waitKey(1) & 0xFF == ord("q"):
