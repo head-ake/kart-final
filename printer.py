@@ -69,10 +69,6 @@ class Printer:
         self.cereal.close()
 
 if __name__ == "__main__":
-    try:
-        while True:
-            printer = Printer()
-            printer.print([(1, 2), (3, 4)])
-
-    except KeyboardInterrupt:
-        printer.close()
+    printer = Printer()
+    printer.print([(50, 50), (75, 50)])
+    printer.close()

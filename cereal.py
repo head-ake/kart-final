@@ -20,25 +20,24 @@ def send_gcode(gcode):
     cereal.write(gcode.encode('utf-8'))
     # possibly add some delay
 
-send_gcode(center_cmd)
-time.sleep(1)
-for test in square_test:
-    send_gcode(test)
-    time.sleep(1)
+try:
+    while True:
+        send_gcode(center_cmd)
+        time.sleep(1)
+        for test in square_test:
+            send_gcode(test)
+            time.sleep(1)
 
-time.sleep(1)
-send_gcode(center_cmd)
-cereal.close()
+        time.sleep(1)
+        send_gcode(center_cmd)
+        cereal.close()
+        # pull new or accept new data
+        # gcode_command = "some gcode based on new data"
+        # send_gcode(gcode_command)
 
-# try:
-#     while True:
-#         # pull new or accept new data
-#         gcode_command = "some gcode based on new data"
-#         send_gcode(gcode_command)
+        send_gcode(home)
 
-#         send_gcode(home)
+        time.sleep(5) # delay or something until new data or whatever
 
-#         time.sleep(5) # delay or something until new data or whatever
-
-# except KeyboardInterrupt:
-#     cereal.close()
+except KeyboardInterrupt:
+    cereal.close()
