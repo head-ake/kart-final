@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 import threading
 import tracker
-import printer
 import popper
 
 vid_path = 'test_files/walking.mp4'
