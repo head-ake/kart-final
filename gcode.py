@@ -33,6 +33,7 @@ def getGCode(toFile: bool, list):
         g.abs_move(point[0], point[1], MOVINGDEPTH)
         g.abs_move(point[0], point[1], WRITINGDEPTH)
         g.abs_move(point[0], point[1], MOVINGDEPTH)
+
     for x in list:
         g.abs_move(x[0], x[1], MOVINGDEPTH)
         cross(x, 6)
