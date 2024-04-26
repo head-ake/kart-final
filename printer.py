@@ -33,6 +33,14 @@ class Printer:
         g.abs_move(point[0] - size, point[1] - size, Printer.MOVE)
         gcode = Printer.remove_object_str(str(g))
         return gcode
+    
+    def dot(point, size):
+        g = G()
+        g.abs_move(point[0], point[1], Printer.MOVE)
+        g.abs_move(point[0], point[1], Printer.WRITE)
+        g.abs_move(point[0], point[1], Printer.MOVE)
+        gcode = Printer.remove_object_str(str(g))
+        return gcode
 
     def send_gcode(self, gcode):
         self.cereal.write(gcode.encode('utf-8'))
@@ -57,7 +65,7 @@ class Printer:
             x, y = val
             # sleep for 3 secs to simulate the drawing process
             # self.lock.acquire()
-            self.send_gcode_lines((Printer.cross(val, Printer.SIZE)))
+            self.send_gcode_lines((Printer.dot(val, Printer.SIZE)))
             # self.lock.release() 
             #time.sleep(30)
             print(x, y)
